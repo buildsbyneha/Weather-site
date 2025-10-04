@@ -19,9 +19,8 @@ def get_weather():
 
     #check for empty string or string with only spaces
     if not city or not city.strip():
-        city = "Jaipur"
+        return redirect(url_for('index'))
    
-
     weather_data = get_current_weather(city)
 
     #City is not found by the API
@@ -33,8 +32,7 @@ def get_weather():
                            status= weather_data["weather"][0]["description"].capitalize(),
                            temp=f"{weather_data['main']['temp']:.1f}",
                            feels_like=f"{weather_data['main']['feels_like']:.1f}"
-                            ) 
-
+                           ) 
       
 
 if __name__ == "__main__":

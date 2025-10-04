@@ -3,17 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ title }} Weather</title>
+    <title>{{ title }} - WeatherWise Forecast</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⛅</text></svg>">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="{{ url_for('static', filename='styles/style.css') }}" rel="stylesheet" />
 </head>
 <body>
-    <h1>{{ title }} Weather</h1>
-    <p>{{ status }} and {{ temp }} &deg;</p>  
-    <p>Feels like {{ feels_like }} &deg;</p>  
-    <form action="/weather" method="post">
-        <label for="city">City:</label>
-        <input type="text" id="city" name="city" placeholder="Enter city name" required />
-        <button type="submit">Submit</button>
-    </form>
+    <div class="background-shapes">
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+    
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-cloud-moon-rain"></i>
+                <h1>WeatherSphere</h1>
+            </div>
+            <p class="subtitle">Beautiful weather insights for {{ title }}</p>
+        </header>
+
+        <div class="search-container">
+            <form class="search-form" action="/weather" method="post">
+                <input type="text" class="search-input" id="city" name="city" placeholder="Search another city..." required>
+                <button type="submit" class="search-btn">
+                    <i class="fas fa-search-location"></i> Search
+                </button>
+            </form>
+        </div>
+
+        <div class="weather-card active">
+            <div class="city-name">
+                <i class="fas fa-map-marker-alt"></i>
+                <h2>{{ title }}</h2>
+            </div>
+            <p class="weather-status">{{ status }}</p>
+            <div class="weather-icon">
+                {% if status.lower().find('clear') != -1 or status.lower().find('sunny') != -1 %}
+                    <i class="fas fa-sun"></i>
+                {% elif status.lower().find('cloud') != -1 %}
+                    <i class="fas fa-cloud"></i>
+                {% elif status.lower().find('rain') != -1 %}
+                    <i class="fas fa-cloud-rain"></i>
+                {% elif status.lower().find('drizzle') != -1 %}
+                    <i class="fas fa-cloud-drizzle"></i>
+                {% elif status.lower().find('snow') != -1 %}
+                    <i class="fas fa-snowflake"></i>
+                {% elif status.lower().find('storm') != -1 or status.lower().find('thunder') != -1 %}
+                    <i class="fas fa-bolt"></i>
+                {% elif status.lower().find('mist') != -1 or status.lower().find('fog') != -1 %}
+                    <i class="fas fa-smog"></i>
+                {% else %}
+                    <i class="fas fa-cloud-sun"></i>
+                {% endif %}
+            </div>
+            <div class="temperature">
+                <span>{{ temp }}</span>
+                <span>°C</span>
+            </div>
+            <p class="feels-like">Feels like <span>{{ feels_like }}</span>°C</p>
+            
+            <div class="weather-details">
+                <div class="detail-card">
+                    <i class="fas fa-wind"></i>
+                    <div class="detail-value">5.2 km/h</div>
+                    <div class="detail-label">Wind Speed</div>
+                </div>
+                <div class="detail-card">
+                    <i class="fas fa-tint"></i>
+                    <div class="detail-value">65%</div>
+                    <div class="detail-label">Humidity</div>
+                </div>
+                <div class="detail-card">
+                    <i class="fas fa-compress-arrows-alt"></i>
+                    <div class="detail-value">1013 hPa</div>
+                    <div class="detail-label">Pressure</div>
+                </div>
+                <div class="detail-card">
+                    <i class="fas fa-eye"></i>
+                    <div class="detail-value">10 km</div>
+                    <div class="detail-label">Visibility</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>WeatherSphere &copy; 2023 | Crafted with <i class="fas fa-heart" style="color: var(--accent);"></i> for weather enthusiasts</p>
+    </footer>
 </body>
 </html>

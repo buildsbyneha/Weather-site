@@ -3,15 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Get Weather Conditions</title>
+    <title>WeatherSphere </title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="{{ url_for('static', filename='styles/style.css') }}" rel="stylesheet" />
 </head>
 <body>
-    <h1>Get Weather Conditions</h1>
-    <form action="/weather" method="post">
-        <label for="city">City:</label>
-        <input type="text" id="city" name="city" placeholder="Enter city name" />
-        <button type="submit">Submit</button>
-    </form>
+    <div class="background-shapes">
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+    
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-cloud-moon-rain"></i>
+                <h1>WeatherSphere</h1>
+            </div>
+            <p class="subtitle">Discover beautiful weather insights for any location worldwide</p>
+        </header>
+
+        <div class="search-container">
+            <form class="search-form" action="/weather" method="post">
+                <input type="text" class="search-input" id="city" name="city" placeholder="Enter a city name..." required>
+                <button type="submit" class="search-btn">
+                    <i class="fas fa-search-location"></i> Search
+                </button>
+            </form>
+        </div>
+        
+        <div class="weather-card" style="text-align: center; opacity: 0.8;">
+            <div class="weather-icon">
+                <i class="fas fa-globe-americas"></i>
+            </div>
+            <h2 style="margin-bottom: 1rem;">Welcome to WeatherSphere</h2>
+            <p style="font-size: 1.2rem; opacity: 0.9;">Enter a city name above to discover current weather conditions</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>WeatherSphere &copy; 2023 | Crafted with <i class="fas fa-heart" style="color: var(--accent);"></i> for weather enthusiasts</p>
+    </footer>
 </body>
-</html> 
+</html>
